@@ -1,7 +1,11 @@
+import DogsFilters from "./components/sections/DogsFilters";
+import DogsTable from "./components/sections/DogsTable";
+
 export default function App() {
   return (
-    <>
-      <h1 className="text-red-500">Teste</h1>
-    </>
+    <main className="h-screen ">
+      <DogsFilters />
+      <DogsTable />
+    </main>
   );
 }
