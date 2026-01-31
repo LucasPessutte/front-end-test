@@ -1,4 +1,3 @@
-// src/hooks/useDogs.ts
 import axios from "axios";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 

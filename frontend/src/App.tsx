@@ -1,16 +1,16 @@
-// src/pages/DogsPage.tsx
 import { useState } from "react";
 import DogsFilters from "@/components/sections/dogs-filters";
 import DogsTable from "@/components/sections/dogs-table";
 
 export default function App() {
   const [page, setPage] = useState(1);
-  const [limit] = useState(10);
+  const [limit, setLimit] = useState(10);
 
   const [filters, setFilters] = useState<{
     breed?: string;
     sex?: string;
     temperament?: string;
+    age?: number;
   }>({});
 
   return (
@@ -32,6 +32,10 @@ export default function App() {
         limit={limit}
         filters={filters}
         onPageChange={setPage}
+        onLimitChange={(newLimit) => {
+          setPage(1);
+          setLimit(newLimit);
+        }}
       />
     </>
   );

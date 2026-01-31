@@ -1,4 +1,3 @@
-// src/components/Sections/DogsTable.tsx
 import {
   Table,
   TableBody,
@@ -8,10 +7,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Button } from "@/components/ui/button";
 import { Spinner } from "../ui/spinner";
 import { calculateAge } from "@/utils/calculateAge";
 import { useDogs } from "@/hooks/useDogs";
+import DogsPagination from "@/components/sections/dogs-pagination";
 
 type Filters = {
   breed?: string;
@@ -24,6 +23,7 @@ type Props = {
   limit: number;
   filters: Filters;
   onPageChange: (page: number) => void;
+  onLimitChange: (limit: number) => void;
 };
 
 export default function DogsTable({
@@ -31,6 +31,7 @@ export default function DogsTable({
   limit,
   filters,
   onPageChange,
+  onLimitChange,
 }: Props) {
   const { data, isLoading, isError } = useDogs({ page, limit, ...filters });
 
@@ -74,27 +75,21 @@ export default function DogsTable({
         </TableBody>
       </Table>
 
-      <div className="flex justify-between items-center mt-6">
-        <Button
-          variant="outline"
-          disabled={pagination.page === 1}
-          onClick={() => onPageChange(page - 1)}
-        >
-          Anterior
-        </Button>
-
-        <span className="text-sm">
-          Página {pagination.page} de {pagination.totalPages}
-        </span>
-
-        <Button
-          variant="outline"
-          disabled={pagination.page === pagination.totalPages}
-          onClick={() => onPageChange(page + 1)}
-        >
-          Próxima
-        </Button>
-      </div>
+      {dogs.length === 0 && (
+        <TableRow>
+          <TableCell colSpan={5} className="text-center py-6">
+            Nenhum cachorro encontrado com os filtros selecionados
+          </TableCell>
+        </TableRow>
+      )}
+      <DogsPagination
+        page={pagination.page}
+        totalPages={pagination.totalPages}
+        total={pagination.total}
+        limit={pagination.limit}
+        onPageChange={onPageChange}
+        onLimitChange={onLimitChange}
+      />
     </section>
   );
 }

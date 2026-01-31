@@ -1,4 +1,3 @@
-// src/constants/dogs.ts
 export const BREEDS = [
   "SRD",
   "LABRADOR",

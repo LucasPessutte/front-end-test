@@ -1,6 +1,7 @@
-// src/components/sections/dogs-filters.tsx
 import { Search } from "lucide-react";
 import { Separator } from "../ui/separator";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import {
   Select,
   SelectContent,
@@ -8,13 +9,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "../ui/button";
 import { BREEDS, SEX_OPTIONS, TEMPERAMENTS } from "@/constants/dogs";
 
 type Filters = {
   breed?: string;
   sex?: string;
   temperament?: string;
+  age?: number;
 };
 
 type Props = {
@@ -34,7 +35,6 @@ export default function DogsFilters({ filters, onChange, onClear }: Props) {
       <Separator className="my-4" />
 
       <div className="flex gap-4 flex-wrap items-end">
-        {/* RAÇA */}
         <Select
           value={filters.breed ?? ""}
           onValueChange={(value) =>
@@ -56,7 +56,6 @@ export default function DogsFilters({ filters, onChange, onClear }: Props) {
           </SelectContent>
         </Select>
 
-        {/* SEXO */}
         <Select
           value={filters.sex ?? ""}
           onValueChange={(value) =>
@@ -78,7 +77,6 @@ export default function DogsFilters({ filters, onChange, onClear }: Props) {
           </SelectContent>
         </Select>
 
-        {/* TEMPERAMENTO */}
         <Select
           value={filters.temperament ?? ""}
           onValueChange={(value) =>
@@ -100,7 +98,31 @@ export default function DogsFilters({ filters, onChange, onClear }: Props) {
           </SelectContent>
         </Select>
 
-        <Button variant="outline" className="ml-auto" onClick={onClear}>
+        <Input
+          type="number"
+          placeholder="Idade"
+          min={0}
+          max={30}
+          value={filters.age ?? ""}
+          className="w-24"
+          onChange={(e) => {
+            const value = Number(e.target.value);
+
+            onChange({
+              ...filters,
+              age:
+                Number.isNaN(value) || value < 0 || value > 30
+                  ? undefined
+                  : value,
+            });
+          }}
+        />
+
+        <Button
+          variant="outline"
+          className="ml-auto bg-amber-300 hover:bg-amber-400 cursor-pointer"
+          onClick={onClear}
+        >
           Limpar filtros
         </Button>
       </div>
