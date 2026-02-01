@@ -26,7 +26,7 @@ type Props = {
 
 export default function DogsFilters({ filters, onChange, onClear }: Props) {
   return (
-    <section className="max-w-7xl mx-auto bg-white rounded-lg p-6 mb-6 mt-10">
+    <section className=" bg-white rounded-lg p-6 mb-6 mt-10 ">
       <div className="flex items-center gap-2">
         <Search width={20} />
         <h1 className="text-2xl font-semibold">Encontre seu Pet</h1>
@@ -103,8 +103,8 @@ export default function DogsFilters({ filters, onChange, onClear }: Props) {
           placeholder="Idade"
           min={0}
           max={30}
-          value={filters.age ?? ""}
           className="w-24"
+          value={filters.age ?? ""}
           onChange={(e) => {
             const value = Number(e.target.value);
 

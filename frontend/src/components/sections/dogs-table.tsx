@@ -50,38 +50,58 @@ export default function DogsTable({
   const { data: dogs, pagination } = data;
 
   return (
-    <section className="max-w-7xl mx-auto mt-6">
-      <Table className="bg-white rounded-lg">
-        <TableHeader className="bg-gray-100">
-          <TableRow>
-            <TableHead>Nome</TableHead>
-            <TableHead>Idade</TableHead>
-            <TableHead>Raça</TableHead>
-            <TableHead>Sexo</TableHead>
-            <TableHead>Temperamento</TableHead>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {dogs.map((dog) => (
-            <TableRow key={dog.id}>
-              <TableCell className="font-medium">{dog.name}</TableCell>
-              <TableCell>{calculateAge(dog.birth_date)} ano(s)</TableCell>
-              <TableCell>{dog.breed}</TableCell>
-              <TableCell>{dog.sex}</TableCell>
-              <TableCell>{dog.temperament}</TableCell>
+    <section className="mt-6">
+      <div className="rounded-xl border bg-white shadow-sm overflow-hidden">
+        <Table>
+          <TableHeader className="bg-gray-50">
+            <TableRow>
+              <TableHead className="text-xs font-semibold uppercase text-gray-600">
+                Nome
+              </TableHead>
+              <TableHead className="text-xs font-semibold uppercase text-gray-600">
+                Idade
+              </TableHead>
+              <TableHead className="text-xs font-semibold uppercase text-gray-600">
+                Raça
+              </TableHead>
+              <TableHead className="text-xs font-semibold uppercase text-gray-600">
+                Sexo
+              </TableHead>
+              <TableHead className="text-xs font-semibold uppercase text-gray-600">
+                Temperamento
+              </TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+
+          <TableBody>
+            {dogs.map((dog) => (
+              <TableRow
+                key={dog.id}
+                className="hover:bg-gray-50 transition-colors"
+              >
+                <TableCell className="font-medium text-gray-900 py-4">
+                  {dog.name}
+                </TableCell>
+                <TableCell className="text-gray-600">
+                  {calculateAge(dog.birth_date)} ano(s)
+                </TableCell>
+                <TableCell className="text-gray-600">{dog.breed}</TableCell>
+                <TableCell className="text-gray-600">{dog.sex}</TableCell>
+                <TableCell className="text-gray-600">
+                  {dog.temperament}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
 
       {dogs.length === 0 && (
-        <TableRow>
-          <TableCell colSpan={5} className="text-center py-6">
-            Nenhum cachorro encontrado com os filtros selecionados
-          </TableCell>
-        </TableRow>
+        <span className="block text-center mt-4 text-gray-500">
+          Nenhum cachorro encontrado com os filtros selecionados
+        </span>
       )}
+
       <DogsPagination
         page={pagination.page}
         totalPages={pagination.totalPages}

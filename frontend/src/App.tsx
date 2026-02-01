@@ -1,42 +1,42 @@
-import { useState } from "react";
-import DogsFilters from "@/components/sections/dogs-filters";
-import DogsTable from "@/components/sections/dogs-table";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import AppSidebar from "@/components/app-sidebar";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import DogsPage from "@/Pages/DogsPage";
+import ChartsPage from "@/Pages/ChartsPage";
+import PlaceholderPage from "@/Pages/PlaceholderPage";
 
 export default function App() {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-
-  const [filters, setFilters] = useState<{
-    breed?: string;
-    sex?: string;
-    temperament?: string;
-    age?: number;
-  }>({});
-
   return (
-    <>
-      <DogsFilters
-        filters={filters}
-        onChange={(newFilters) => {
-          setPage(1);
-          setFilters(newFilters);
-        }}
-        onClear={() => {
-          setPage(1);
-          setFilters({});
-        }}
-      />
+    <BrowserRouter>
+      <SidebarProvider>
+        <div className="flex min-h-screen w-full">
+          <AppSidebar />
 
-      <DogsTable
-        page={page}
-        limit={limit}
-        filters={filters}
-        onPageChange={setPage}
-        onLimitChange={(newLimit) => {
-          setPage(1);
-          setLimit(newLimit);
-        }}
-      />
-    </>
+          <main className="flex-1 bg-muted/40">
+            {/* Header mobile */}
+            <div className="md:hidden p-4 border-b">
+              <SidebarTrigger />
+            </div>
+
+            <div className="p-6">
+              <Routes>
+                <Route path="/" element={<ChartsPage />} />
+                <Route path="/pets" element={<DogsPage />} />
+                <Route
+                  path="/settings"
+                  element={<PlaceholderPage title="Settings" />}
+                />
+                <Route
+                  path="/account"
+                  element={<PlaceholderPage title="Account" />}
+                />
+              </Routes>
+            </div>
+          </main>
+        </div>
+      </SidebarProvider>
+    </BrowserRouter>
   );
 }
