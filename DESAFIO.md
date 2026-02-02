@@ -66,10 +66,11 @@ Implementar um ou mais dos seguintes itens pode destacar sua entrega:
 
 Criar uma seção de **analytics/estatísticas** com gráficos que mostrem:
 
-- Distribuição de cachorros por raça (gráfico de pizza ou barras)
-- Distribuição por temperamento (gráfico de barras)
-- Distribuição por sexo (gráfico de pizza)
-- Distribuição de idade (histograma ou gráfico de linha)
+- Distribuição de quantidade de cachorros por raça (gráfico de pizza ou barras)
+- Distribuição por temperamento em % (gráfico de pizza)
+- Distribuição por sexo (gráfico de barras)
+- Distribuição de idade agrupado por raça (gráfico duplo de barras, para comparação)
+  - Eixo Y: Idade, Eixo X: Raça.
 - Total de cachorros por categoria
 
 **Sugestões de bibliotecas:** Chart.js, Recharts, Victory, ApexCharts, D3.js
