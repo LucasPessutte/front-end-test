@@ -11,6 +11,7 @@ import { Spinner } from "../ui/spinner";
 import { calculateAge } from "@/utils/calculateAge";
 import { useDogs } from "@/hooks/useDogs";
 import DogsPagination from "@/components/sections/dogs-pagination";
+import { formatBreed, formatSex, formatTemperament } from "@/utils/Formatters";
 
 type Filters = {
   breed?: string;
@@ -51,7 +52,7 @@ export default function DogsTable({
 
   return (
     <section className="mt-6">
-      <div className="rounded-xl border bg-white shadow-sm overflow-hidden">
+      <div className="rounded-xl border bg-white shadow-sm overflow-x-auto">
         <Table>
           <TableHeader className="bg-gray-50">
             <TableRow>
@@ -85,10 +86,14 @@ export default function DogsTable({
                 <TableCell className="text-gray-600">
                   {calculateAge(dog.birth_date)} ano(s)
                 </TableCell>
-                <TableCell className="text-gray-600">{dog.breed}</TableCell>
-                <TableCell className="text-gray-600">{dog.sex}</TableCell>
                 <TableCell className="text-gray-600">
-                  {dog.temperament}
+                  {formatBreed(dog.breed)}
+                </TableCell>
+                <TableCell className="text-gray-600">
+                  {formatSex(dog.sex)}
+                </TableCell>
+                <TableCell className="text-gray-600">
+                  {formatTemperament(dog.temperament)}
                 </TableCell>
               </TableRow>
             ))}

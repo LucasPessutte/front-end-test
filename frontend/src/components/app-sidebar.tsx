@@ -17,8 +17,8 @@ import {
 const menuItems = [
   { title: "Dashboard", icon: Home, to: "/" },
   { title: "Pets", icon: Dog, to: "/pets" },
-  { title: "Settings", icon: Settings, to: "/settings" },
-  { title: "Account", icon: User, to: "/account" },
+  { title: "Configurações", icon: Settings, to: "/" },
+  { title: "Perfil", icon: User, to: "/" },
 ];
 
 export default function AppSidebar() {
